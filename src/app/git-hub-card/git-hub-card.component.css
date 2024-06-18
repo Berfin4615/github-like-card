@@ -88,7 +88,6 @@
 .card::before {
     content: "";
     position: relative;
-
     border-radius: inherit;
     background: radial-gradient(
         1500px circle at var(--x) var(--y),
@@ -104,8 +103,31 @@
 
 .sponsors{
     display: inline;
+    overflow: hidden;
 }
 .sponsor-card{
-    border: 2px solid black;
+    position: relative;
+    color: #fff;
+    gap: 2px;
+    border: 2px solid #2d333a;
+    border-radius: 5px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    padding-left: 15% !important;
+    padding-right: 15% !important;
 }
 
+.sponsor-image{
+    border-radius: 50%;
+}
+
+.heart{
+    color: #b5bdc5;
+    fill: currentColor;
+}
+
+.sponsor-button{
+    background-color: #21262d;
+}
