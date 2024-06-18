@@ -29,29 +29,28 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
-  executeJavaScript() {
+ executeJavaScript() {
     const cardContainer = document.querySelector(".glowing-card") as HTMLElement | null;
-    const card = document.querySelector(".glowing-card .card") as HTMLElement | null;
-
+    const card = document.querySelector(".card") as HTMLElement | null;
     if (cardContainer && card) {
-      card.addEventListener('mousemove', (e) => {
-        const xAxis = (card.offsetWidth / 2 - e.offsetX) / 20;
-        const yAxis = (card.offsetHeight / 2 - e.offsetY) / 20;
-
-        if (e.offsetX < card.offsetWidth / 2) {
+      cardContainer.addEventListener('mousemove', (e) => {
+        const xAxis = (cardContainer.offsetWidth / 2 - e.pageX) / 50;
+        const yAxis = (cardContainer.offsetHeight / 2 - e.pageY) / 50;
+        console.log(e.pageX )
+        if (e.pageX < card.offsetWidth / 2) {
           card.style.transform = `rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
         } else {
           card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
         }
 
-        const gradientX = (e.offsetX / card.offsetWidth) * 100;
-        const gradientY = (e.offsetY / card.offsetHeight) * 100;
+        const gradientX = (e.pageX / card.offsetWidth) * 95;
+        const gradientY = (e.pageY / card.offsetHeight) * 50;
         card.style.background = `radial-gradient(2000px circle at ${gradientX}% ${gradientY}%, #ff00d44d, transparent 15%)`;
       });
 
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-        card.style.background = `rgba(0, 94, 255, 0)`;
+      cardContainer.addEventListener('mouseleave', (e) => {
+          cardContainer.style.transform = `rotateY(0deg) rotateX(0deg)`;
+          card.style.background = `rgba(0, 94, 255, 0)`;
       });
     }
   }
