@@ -1,4 +1,4 @@
-.glowing-card{
+.glowing-card {
     min-height: 100vh;
     padding: 2em;
     display: flex;
@@ -7,7 +7,8 @@
     overflow: hidden;
     position: relative;
 }
-.glowing-card::before{
+
+.glowing-card::before {
     content: "";
     position: absolute;
     width: 100%;
@@ -16,7 +17,8 @@
     left: 0%;
     background-color: rgba(0, 0, 0, 0.7);
 }
-.glowing-card .card{
+
+.glowing-card .card {
     position: relative;
     width: 22em;
     height: 23em;
@@ -31,8 +33,11 @@
     justify-content: center;
     align-items: center;
     transition: 100ms;
+    perspective: 1000px;
+    transform: rotateX(0deg) rotateY(0deg); /* Initial transform for tilt effect */
 }
-.glowing-card .card-content{
+
+.glowing-card .card-content {
     background-color: rgba(29, 29, 35, 0.7);
     border-radius: inherit;
     padding: 1.5em;
@@ -44,24 +49,25 @@
 .glowing-card:hover .card {
     background: radial-gradient(
         1500px circle at var(--x) var(--y),
-        rgba(255, 0, 212, 0.9),
+        #ff00d44d,
         transparent 15%
     );
 }
-.card::before{
+
+.card::before {
     content: "";
     position: absolute;
     margin: 0;
     border-radius: inherit;
     background: radial-gradient(
         1500px circle at var(--x) var(--y),
-        rgba(255, 0, 212, 0.9),
-        transparent 35%
+        rgba(255, 0, 212, 0.3),
+        transparent 15%
     );
     opacity: 0;
     z-index: 2;
 }
 
-.card:hover::before{
+.card:hover::before {
     opacity: 1;
 }

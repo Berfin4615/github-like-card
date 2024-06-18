@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { GitHubCardComponent } from './git-hub-card/git-hub-card.component';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -10,32 +11,47 @@ import { GitHubCardComponent } from './git-hub-card/git-hub-card.component';
     GitHubCardComponent
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'] 
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'github-like-card';
 
-  constructor() { }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
   ngOnInit(): void {
-    this.executeJavaScript();
+  }
+
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.executeJavaScript();
+    }
   }
 
   executeJavaScript() {
-    const cardContainer = document.querySelector(".glowing-card");
+    const cardContainer = document.querySelector(".glowing-card") as HTMLElement | null;
     const card = document.querySelector(".glowing-card .card") as HTMLElement | null;
 
     if (cardContainer && card) {
-      cardContainer.addEventListener("mousemove", (event: Event) => {
-        const e = event as MouseEvent;
-        const rect = card.getBoundingClientRect();
-        if (rect) {
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
+      card.addEventListener('mousemove', (e) => {
+        const xAxis = (card.offsetWidth / 2 - e.offsetX) / 20;
+        const yAxis = (card.offsetHeight / 2 - e.offsetY) / 20;
 
-          card.style.setProperty("--x", `${x}px`);
-          card.style.setProperty("--y", `${y}px`);
+        if (e.offsetX < card.offsetWidth / 2) {
+          card.style.transform = `rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
+        } else {
+          card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
         }
+
+        const gradientX = (e.offsetX / card.offsetWidth) * 100;
+        const gradientY = (e.offsetY / card.offsetHeight) * 100;
+        card.style.background = `radial-gradient(2000px circle at ${gradientX}% ${gradientY}%, #ff00d44d, transparent 15%)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        card.style.background = `rgba(0, 94, 255, 0)`;
       });
     }
   }
