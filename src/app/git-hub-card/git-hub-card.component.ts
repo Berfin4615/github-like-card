@@ -8,5 +8,4 @@ import { Component } from '@angular/core';
   styleUrl: './git-hub-card.component.css'
 })
 export class GitHubCardComponent {
-
 }
