@@ -1,10 +1,20 @@
 <div class="h-screen flex flex-col items-center justify-center">
-    <div class="home shadow-md rounded p-10 mb-4">
-        <h1 class="block text-sm font-bold text-white mb-4 flex justify-center">Welcome!</h1>
-        <div class="flex items-center justify-center">
-            <button class="bg-black hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" (click)="authService.logout()">
-              Logout
-            </button>
-        </div>
+    <div *ngIf="showAlert" class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+      <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+      </svg>
+      <span class="sr-only">Info</span>
+      <div>
+        <span class="font-medium">Success!</span> Logout Successful.
+      </div>
     </div>
-</div>
+    <div class="home shadow-md rounded p-10 mb-4">
+      <h1 class="block text-sm font-bold text-white mb-4 flex justify-center">Welcome! Login successful!</h1>
+      <div class="flex items-center justify-center">
+        <button class="bg-black hover:bg-white hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+  

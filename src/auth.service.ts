@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { from, Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { tap, delay } from 'rxjs/operators';
 import { UserInterface } from './user.interface';
 
 @Injectable({
@@ -23,24 +24,24 @@ export class AuthService {
       userData.password
     )
       .then(() => {
-        alert('Login Successful');
         this.router.navigate(['/home']);
       })
       .catch((error) => {
         console.error('Error:', error);
-        alert('Incorrect email or password');
       });
 
     return from(promise);
   }
 
   logout(): Observable<void> {
-    const promise = this.auth.signOut().then(() => {
-      localStorage.removeItem('user');
-      alert('Logout Successful');
-      this.router.navigate(['']);
-    });
-
-    return from(promise);
+    return from(this.auth.signOut()).pipe(
+      tap(() => {
+        localStorage.removeItem('user');
+      }),
+      delay(1000), 
+      tap(() => {
+        this.router.navigate(['']);
+      })
+    );
   }
 }
