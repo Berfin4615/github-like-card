@@ -1,4 +1,7 @@
 
+.login-button:hover{
+    background-color: #292e36;
+}
 .glowing-card {
     padding: 2em;
     display: flex;
