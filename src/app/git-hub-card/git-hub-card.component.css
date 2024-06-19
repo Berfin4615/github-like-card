@@ -76,6 +76,7 @@
     height: calc(100% - 4px);
     width: calc(100% - 4px);
     z-index: 999;
+    align-items: center;
 }
 
 .glowing-card:hover .card {
@@ -106,11 +107,13 @@
     display: flex;
     justify-content: end;
     align-items: center;
+    margin-left: 0;
     transform: rotate(-15deg) translateZ(10px);
 }
 .sponsor-card{
     position: relative;
     color: #fff;
+    background-color: #0d1117;
     gap: 2px;
     border: 2px solid #2d333a;
     border-radius: 5px !important;
@@ -131,9 +134,34 @@
 .sponsor-button{
     background-color: #21262d;
     cursor: pointer;
-    padding-left: 5%;
-    padding-right: 5%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 .sponsor-button:hover{
     background-color: #292e36;
+}
+.card-content-container{
+    flex-direction: row;
+}
+
+@media only screen and (max-width: 1024px){
+    .card-content-container{
+        flex-direction: column;
+    }
+    .glowing-card .card{
+        height: 100%;
+    }
+    .sponsors-container{
+        overflow: hidden;
+    }
+    .sponsors{
+        justify-content: center;
+        margin-left: 51%;
+    }
+    .sponsors-container{
+        overflow: hidden;
+    }
 }
