@@ -2,13 +2,17 @@ import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID } from '@angular/
 import { RouterOutlet } from '@angular/router';
 import { GitHubCardComponent } from './git-hub-card/git-hub-card.component';
 import { isPlatformBrowser } from '@angular/common';
+import { LogicComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    GitHubCardComponent
+    GitHubCardComponent,
+    LogicComponent,
+    HttpClientModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
