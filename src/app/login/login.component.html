@@ -1,17 +1,13 @@
 <h1>Login</h1>
 
-@if (errorMessage) {
-    <div>{{ errorMessage }}</div>
-  }
-  
-<form [formGroup] = "form" (ngSubmit)="onSubmit()">
-    <div>
-        <input type="text" placeholder="Email" formControlName="email" />
-    </div>
-    <div>
-        <input type="password" placeholder="Password" formControlName="password" />
-    </div>
-    <div>
-        <button type="submit">Sign In</button>
-    </div>
+<form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+  <div>
+    <input type="text" placeholder="Email" id="email" [(ngModel)]="user.email" name="email" required />
+  </div>
+  <div>
+    <input type="password" placeholder="Password" id="password" [(ngModel)]="user.password" name="password" required />
+  </div>
+  <div>
+    <button type="submit">Sign In</button>
+  </div>
 </form>

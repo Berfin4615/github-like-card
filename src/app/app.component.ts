@@ -1,21 +1,19 @@
 import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GitHubCardComponent } from './git-hub-card/git-hub-card.component';
 import { isPlatformBrowser } from '@angular/common';
-import { LogicComponent } from './login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    CommonModule,
+    RouterModule,
     RouterOutlet,
-    GitHubCardComponent,
-    LogicComponent,
-    HttpClientModule
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'github-like-card';
@@ -24,8 +22,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -33,14 +30,13 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
   }
 
- executeJavaScript() {
+  executeJavaScript() {
     const cardContainer = document.querySelector(".glowing-card") as HTMLElement | null;
     const card = document.querySelector(".card") as HTMLElement | null;
     if (cardContainer && card) {
       cardContainer.addEventListener('mousemove', (e) => {
         const xAxis = (cardContainer.offsetWidth / 2 - e.pageX) / 50;
         const yAxis = (cardContainer.offsetHeight / 2 - e.pageY) / 50;
-        console.log(e.pageX )
         if (e.pageX < card.offsetWidth / 2) {
           card.style.transform = `rotateY(${-xAxis}deg) rotateX(${yAxis}deg)`;
         } else {
@@ -53,8 +49,8 @@ export class AppComponent implements OnInit, AfterViewInit {
       });
 
       cardContainer.addEventListener('mouseleave', (e) => {
-          cardContainer.style.transform = `rotateY(0deg) rotateX(0deg)`;
-          card.style.background = `rgba(0, 94, 255, 0)`;
+        cardContainer.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        card.style.background = `rgba(0, 94, 255, 0)`;
       });
     }
   }

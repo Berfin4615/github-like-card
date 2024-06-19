@@ -1,26 +1,29 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { UserInterface } from '../../user.interface';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [FormsModule],
+  styleUrls: ['./login.component.css'],
+  providers:  [
+    AuthService
+  ]
 })
-export class LogicComponent {
-  fb = inject(FormBuilder);
-  http = inject(HttpClient);
-  router = inject(Router);
+export class LoginComponent {
+  user: UserInterface = {
+    email: '',
+    password: '',
+  };
 
-  form = this.fb.nonNullable.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required],
-  });
-  errorMessage: string | null = null;
+  constructor(private authService: AuthService) {}
 
-  onSubmit(): void {
-    console.log('login');
+  login(form: NgForm): void {
+    if (form.valid) {
+      this.authService.login(this.user);
+    }
   }
 }
