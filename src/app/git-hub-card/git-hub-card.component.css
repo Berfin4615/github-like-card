@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: visible;
+    overflow: hidden;
     position: relative;
 }
 .arrow{
@@ -66,6 +66,7 @@
     perspective: 1000px;
     transform: rotateX(0deg) rotateY(0deg); 
     width: 100%;
+    overflow: hidden;
 }
 
 .glowing-card .card-content {
@@ -102,8 +103,10 @@
 }
 
 .sponsors{
-    display: inline;
-    overflow: hidden;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    transform: rotate(-15deg) translateZ(10px);
 }
 .sponsor-card{
     position: relative;
@@ -112,11 +115,8 @@
     border: 2px solid #2d333a;
     border-radius: 5px !important;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5%;
-    padding-left: 15% !important;
-    padding-right: 15% !important;
+    justify-content: end;
+    align-items: start;
 }
 
 .sponsor-image{
@@ -130,4 +130,10 @@
 
 .sponsor-button{
     background-color: #21262d;
+    cursor: pointer;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.sponsor-button:hover{
+    background-color: #292e36;
 }
