@@ -30,7 +30,7 @@ To get started with this project, follow these steps:
 
    - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/).
    - Obtain your Firebase configuration details (apiKey, authDomain, databaseURL, projectId, storageBucket, messagingSenderId, appId) from Firebase project settings.
-   - Replace the Firebase configuration in `src/environments/environment.ts` and `src/environments/environment.prod.ts` with your Firebase project configuration.
+   - Replace the Firebase configuration in `src/environments/environment.ts` and `app/app.config.ts` with your Firebase project configuration.
 
 4. **Setup Firebase Authentication:**
 
@@ -91,4 +91,4 @@ To deploy the Angular Firebase project, follow these steps:
 
 ## Mobile Responsiveness
 
-This project is designed with mobile responsiveness in mind. The Angular Material components used are responsive by default, ensuring a consistent user experience across different devices and screen sizes.
+This project is designed with mobile responsiveness in mind. The Tailwind components used are responsive by default, ensuring a consistent user experience across different devices and screen sizes.
